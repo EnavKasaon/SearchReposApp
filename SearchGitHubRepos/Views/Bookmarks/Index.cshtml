@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <div class="container" ng-app="myApp">
+        <h3>My Bookmarks</h3>
+        <hr />
+        <div class="row" ng-controller="bookmarkController">
+            <div ng-show="allBookmarks.length > 0" class="col-md-8 offset-md-2">
+                <div ng-repeat="repos in allBookmarks" class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <div class="card-body">
+                                <img src="{{ repos.avatar }}" style="max-width: 90px; max-height: 90px;" class="card-img img-thumbnail" alt="user avatar" width="64" height="64">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <p class="card-text">{{ repos.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+            @section scripts {
+    @Scripts.Render("~/Scripts/app/services/appService.js");
+                @Scripts.Render("~/Scripts/app/bookmarks/bookmarkController.js");
+            }
+</body>
+</html>
+
+

@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <div ng-app="myApp">
+        <h3>Search Repositories</h3>
+        <hr />
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                <div ng-controller="searchReposController">
+                   
+                    <div class="form-group">
+                        <label for="searchText">Please enter repository name: </label>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" ng-model="searchTerm" id="searchText" placeholder="Some text...">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-dark" ng-click="resultCall(searchTerm)">Search</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div ng-show="repositories.length < 1" class="well">No data to display ... </div>
+                    <div ng-show="repositories.length > 0" class="justify-content-md-center">
+                        <div ng-repeat="repos in repositories" class="card mb-3" >
+                            <div class="row no-gutters">
+                                <div class="col-md-2" >
+                                    <div class="card-body">
+                                        <img src="{{ repos.avatar }}" style="max-width: 90px; max-height: 90px;" class="card-img img-thumbnail" alt="user avatar" width="64" height="64">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="card-body">
+                                        <p class="card-text">{{ repos.name }}</p>
+                                        <button class="btn btn-primary" ng-controller="bookmarkController" ng-click="AddBookmarkCall(repos)">Add to Bookmarks</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>  
+        </div>
+    @section scripts {
+    @Scripts.Render("~/Scripts/app/services/appService.js");
+    @Scripts.Render("~/Scripts/app/repositories/ReposController.js");
+    @Scripts.Render("~/Scripts/app/bookmarks/bookmarkController.js");
+        }
+</body> 
+
+</html>
+
